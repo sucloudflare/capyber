@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  mfaSecret    String?
+  mfaEnabled   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastLoginAt  DateTime?
+  sessions     Session[]
+}
+
+// CAPYBER — sessões de login (cookie httpOnly → token válido por 30 dias)
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  userAgent String?
+  ip        String?
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// CAPYBER — certificados digitais da Trilha 3D (um por fase/tipo de conhecimento)
+model Certificate {
+  id         String   @id @default(cuid())
+  code       String   @unique // código público de verificação: CAPY-XXXX-XXXX
+  holderName String // nome do operador impresso no PDF
+  phaseId    String // id da fase no curso (f1..f6, boss)
+  phaseName  String // nome da fase no momento da emissão
+  area       String // tipo de conhecimento (SIEM, Phishing, Malware…)
+  certRef    String // referência às certificações reais (CySA+, BTL1, SC-200…)
+  score      Int // nota da prova (0–100)
+  issuedAt   DateTime @default(now())
+  hash       String // SHA-256 de integridade (código+nome+fase+nota)
+}
+
+// CAPYBER — certificados de conquistas (livro concluído, CTF vencido, jogo stealth)
+// Modelo distinto de `Certificate` (Trilha 3D): emissão livre por feito, com
+// serial público e código de verificação derivado (sha256 type|serial|name|salt).
+model AwardCertificate {
+  id         String   @id @default(cuid())
+  type       String // 'livro' | 'ctf' | 'stealth'
+  holderName String // nome do operador impresso no PDF
+  serial     String   @unique // CAPY-CERT-<ANO>-<6 alfanuméricos>
+  verifyCode String   @unique // sha256(type|serial|name|salt) → 16 chars hex
+  metaJson   String? // metadados extras da emissão (JSON em string)
+  createdAt  DateTime @default(now())
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
