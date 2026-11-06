@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"        # lê bun.lock/package.json
+    directory: "/"
+    schedule: { interval: "weekly" }
+    open-pull-requests-limit: 5
+    groups:
+      radix-ui: { patterns: ["@radix-ui/*"] }
+      react-three: { patterns: ["three", "@react-three/*", "@types/three"] }
+  - package-ecosystem: "npm"
+    directory: "/mini-services/threat-engine"
+    schedule: { interval: "weekly" }
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "monthly" }
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule: { interval: "monthly" }

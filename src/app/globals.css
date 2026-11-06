@@ -1,0 +1,1943 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ═══════════ Fontes de marca (offline-safe) ═══════════
+   next/font/google exige rede; em sandbox usamos stacks de sistema com a
+   mesma cara (display técnico, sans humanista, mono, pixel). */
+:root {
+  --font-display-digi: 'Exo 2', 'Segoe UI', 'Trebuchet MS', system-ui, sans-serif;
+  --font-heading-digi: 'Exo 2', 'Segoe UI', 'Trebuchet MS', system-ui, sans-serif;
+  --font-sans-prod: 'Nunito', ui-rounded, 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono-prod: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-pixel: 'Press Start 2P', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans-prod);
+  --font-mono: var(--font-mono-prod);
+  --font-display: var(--font-display-digi);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* piso tipográfico global: 17px */
+  --text-xs: 1.0625rem;
+  --text-xs--line-height: 1.45;
+  --text-sm: 1.0625rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.55;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.3125rem;
+  --text-xl--line-height: 1.45;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 1.35;
+  --text-3xl: 1.8125rem;
+  --text-3xl--line-height: 1.25;
+  --text-4xl: 2.1875rem;
+  --text-4xl--line-height: 1.18;
+  --text-5xl: 2.6875rem;
+  --text-5xl--line-height: 1.1;
+  --text-6xl: 3.3125rem;
+  --text-6xl--line-height: 1.05;
+}
+
+:root {
+  --radius: 0.6rem;
+  --background: oklch(0.975 0.012 240);
+  --foreground: oklch(0.28 0.05 255);
+  --card: oklch(0.99 0.005 240);
+  --card-foreground: oklch(0.28 0.05 255);
+  --popover: oklch(0.99 0.005 240);
+  --popover-foreground: oklch(0.28 0.05 255);
+  --primary: oklch(0.75 0.155 65);
+  --primary-foreground: oklch(0.99 0.005 240);
+  --secondary: oklch(0.93 0.02 240);
+  --secondary-foreground: oklch(0.3 0.05 255);
+  --muted: oklch(0.94 0.015 240);
+  --muted-foreground: oklch(0.5 0.05 250);
+  --accent: oklch(0.92 0.03 235);
+  --accent-foreground: oklch(0.28 0.05 255);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.35 0.06 255 / 24%);
+  --input: oklch(0.35 0.06 255 / 28%);
+  --ring: oklch(0.7 0.14 65 / 60%);
+  --chart-1: oklch(0.62 0.16 150);
+  --chart-2: oklch(0.72 0.15 70);
+  --chart-3: oklch(0.58 0.21 27);
+  --chart-4: oklch(0.6 0.13 245);
+  --chart-5: oklch(0.72 0.15 60);
+  --sidebar: oklch(0.97 0.014 240);
+  --sidebar-foreground: oklch(0.28 0.05 255);
+  --sidebar-primary: oklch(0.62 0.16 150);
+  --sidebar-primary-foreground: oklch(0.99 0.005 240);
+  --sidebar-accent: oklch(0.92 0.03 235);
+  --sidebar-accent-foreground: oklch(0.28 0.05 255);
+  --sidebar-border: oklch(0.35 0.06 255 / 24%);
+  --sidebar-ring: oklch(0.7 0.14 65 / 60%);
+
+  /* paleta HUD CAPYBER */
+  --cap-bg: #eef5fe;
+  --cap-bg-solid: #eef5fe;
+  --cap-panel: #ffffff;
+  --cap-panel-raised: #f2f7ff;
+  --cap-ink: #10315c;
+  --cap-border: #b9d4f0;
+  --cap-border-strong: #8fb8e4;
+  --cap-glow: #21a44a;
+  --cap-orange: #f5920b;
+  --cap-orange-deep: #e07f0a;
+  --cap-cyan: #2569b8;
+  --cap-cyan-soft: #7cb6ec;
+  --cap-accent: #f5920b;
+  --cap-bright: #123a6b;
+  --cap-text: #274b73;
+  --cap-dim: #54708f;
+  --cap-faint: #7e96b3;
+  --cap-warn: #b45309;
+  --cap-danger: #c0182b;
+  --cap-violet: #8b5cf6;
+  --cap-yellow: #ffb020;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-size: 17px;
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans-prod), -apple-system, "Segoe UI", sans-serif;
+    letter-spacing: 0.005em;
+    min-height: 100vh;
+  }
+  ::selection {
+    background: rgba(245, 146, 11, 0.35);
+    color: var(--cap-ink);
+  }
+  h1, h2, h3, h4 {
+    color: var(--cap-bright);
+    text-wrap: balance;
+    font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid rgba(245, 146, 11, 0.85);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+.cap-bg-grid {
+  background:
+    radial-gradient(1100px 520px at 50% -12%, rgba(47, 127, 209, 0.1), transparent 62%),
+    radial-gradient(900px 480px at 88% 110%, rgba(245, 146, 11, 0.08), transparent 60%),
+    radial-gradient(rgba(47, 127, 209, 0.1) 1.2px, transparent 1.2px),
+    linear-gradient(180deg, #f8fbff 0%, #eef5fe 55%, #e4effc 100%);
+  background-size: 100% 100%, 100% 100%, 26px 26px, 100% 100%;
+}
+.cap-bg-grid::before {
+  content: '';
+  position: fixed;
+  top: -60px;
+  left: -60px;
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(47, 127, 209, 0.18) 0 16px,
+    rgba(47, 127, 209, 0.05) 16px 32px,
+    transparent 32px 54px
+  );
+  -webkit-mask-image: radial-gradient(circle at 0 0, #000 0 46%, transparent 74%);
+  mask-image: radial-gradient(circle at 0 0, #000 0 46%, transparent 74%);
+}
+.cap-bg-grid::after {
+  content: '';
+  position: fixed;
+  bottom: -60px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(245, 146, 11, 0.2) 0 16px,
+    rgba(16, 49, 92, 0.08) 16px 32px,
+    transparent 32px 54px
+  );
+  -webkit-mask-image: radial-gradient(circle at 100% 100%, #000 0 46%, transparent 74%);
+  mask-image: radial-gradient(circle at 100% 100%, #000 0 46%, transparent 74%);
+}
+
+.cap-panel {
+  border: 2px solid var(--cap-border);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(47, 127, 209, 0.05), rgba(47, 127, 209, 0) 30%),
+    var(--cap-panel);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.85) inset,
+    0 0 18px rgba(124, 182, 236, 0.35),
+    0 14px 28px -22px rgba(16, 49, 92, 0.5);
+}
+@layer components {
+  :where(.cap-panel) {
+    position: relative;
+  }
+}
+.cap-panel::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: var(--cap-bg-solid);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+.cap-panel::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, transparent calc(50% - 1.4px), var(--cap-border-strong) 50%, transparent calc(50% + 1.4px));
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  pointer-events: none;
+}
+
+.cap-panel-raised {
+  background:
+    linear-gradient(180deg, rgba(47, 127, 209, 0.06), rgba(47, 127, 209, 0) 36%),
+    var(--cap-panel-raised);
+}
+
+.cap-danger-panel {
+  position: relative;
+  border: 2px solid #4a0a12;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #8f1622 0%, #6d0f1a 100%);
+  color: #ffe9ec;
+  box-shadow: 0 0 18px rgba(143, 22, 34, 0.35), 0 18px 34px -24px rgba(74, 10, 18, 0.9);
+}
+.cap-danger-card {
+  background: linear-gradient(180deg, #7c1220 0%, #5e0c17 100%);
+  border: 2px solid rgba(255, 93, 120, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(255, 60, 80, 0.18) inset;
+}
+
+.cap-chip {
+  position: relative;
+  background: #ffffff;
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong))
+    drop-shadow(0 6px 14px rgba(47, 127, 209, 0.28));
+}
+
+.cap-side-item {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f8ff 100%);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong))
+    drop-shadow(0 6px 14px rgba(47, 127, 209, 0.22));
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.cap-side-item:hover {
+  transform: translateX(2px);
+}
+.cap-side-item[data-state='active'] {
+  background: linear-gradient(180deg, #eaf4ff 0%, #cfe6fd 100%);
+  filter:
+    drop-shadow(2px 0 0 #5d9bd8) drop-shadow(-2px 0 0 #5d9bd8)
+    drop-shadow(0 2px 0 #5d9bd8) drop-shadow(0 -2px 0 #5d9bd8)
+    drop-shadow(0 8px 18px rgba(47, 127, 209, 0.4));
+}
+
+.cap-skew-plate {
+  background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%);
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong));
+}
+
+.cap-nav-bar {
+  background: linear-gradient(180deg, #ffffff 0%, #eaf3fd 100%);
+  clip-path: polygon(22px 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong))
+    drop-shadow(0 8px 18px rgba(47, 127, 209, 0.25));
+}
+
+.cap-tab {
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--cap-bright);
+  background: transparent;
+  padding: 0.4rem 0.85rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+  min-height: 56px;
+  min-width: 84px;
+}
+.cap-tab:hover {
+  color: var(--cap-cyan);
+  background: rgba(124, 182, 236, 0.18);
+  transform: translateY(-1px);
+}
+.cap-tab[data-state='active'] {
+  color: var(--cap-cyan);
+  background: linear-gradient(180deg, rgba(214, 235, 255, 0.95), rgba(178, 216, 250, 0.95));
+  box-shadow: 0 0 0 2px rgba(93, 155, 216, 0.55), 0 4px 12px rgba(47, 127, 209, 0.3);
+  font-weight: 800;
+}
+
+.cap-badge-shield {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #eef6ff 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong))
+    drop-shadow(0 8px 16px rgba(47, 127, 209, 0.28));
+  transition: transform 0.15s ease;
+}
+.cap-badge-shield:hover {
+  transform: translateY(-3px);
+}
+
+.cap-logo {
+  font-family: var(--font-display-digi), var(--font-sans-prod), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #14355f;
+  text-shadow: 2px 2px 0 rgba(124, 182, 236, 0.45);
+}
+
+.cap-heading {
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-size: 1.1875rem;
+  letter-spacing: 0.01em;
+  font-weight: 800;
+  color: var(--cap-bright);
+}
+
+.cap-mono {
+  font-family: var(--font-mono-prod), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.cap-badge {
+  border-color: var(--cap-border-strong);
+  color: var(--cap-text);
+  background: rgba(47, 127, 209, 0.08);
+}
+
+.cap-input {
+  background: #ffffff !important;
+  border: 2px solid var(--cap-border-strong) !important;
+  color: var(--cap-bright) !important;
+  font-size: 1.0625rem;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(124, 182, 236, 0.25);
+}
+.cap-input::placeholder {
+  color: #8aa7c9 !important;
+}
+
+.cap-sev {
+  display: inline-block;
+  border-radius: 7px;
+  padding: 0.05rem 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 49, 92, 0.25);
+}
+.cap-sev-critica { background: linear-gradient(180deg, #c0182b, #99061a); }
+.cap-sev-alta { background: linear-gradient(180deg, #f07016, #d95f0e); }
+.cap-sev-media { background: linear-gradient(180deg, #ffb020, #f59e0b); color: #10315c; }
+.cap-sev-baixa { background: linear-gradient(180deg, #2fb45f, #1f9648); }
+
+.cap-btn-primary {
+  background: linear-gradient(180deg, #ffb24d 0%, #f5920b 55%, #e07f0a 100%);
+  color: #ffffff;
+  text-shadow: 1px 1px 0 rgba(16, 49, 92, 0.35);
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-ink)) drop-shadow(-2px 0 0 var(--cap-ink))
+    drop-shadow(0 2px 0 var(--cap-ink)) drop-shadow(0 -2px 0 var(--cap-ink));
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cap-btn-primary:hover {
+  filter:
+    drop-shadow(2px 0 0 var(--cap-ink)) drop-shadow(-2px 0 0 var(--cap-ink))
+    drop-shadow(0 2px 0 var(--cap-ink)) drop-shadow(0 -2px 0 var(--cap-ink))
+    brightness(1.05);
+  transform: translateY(-1px);
+}
+.cap-btn-primary:active {
+  transform: translateY(2px);
+}
+
+.cap-btn-steel {
+  background: linear-gradient(180deg, #ddebfb 0%, #b9d6f3 60%, #a5c8ec 100%);
+  color: #14355f;
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  filter:
+    drop-shadow(2px 0 0 #6f9fd0) drop-shadow(-2px 0 0 #6f9fd0)
+    drop-shadow(0 2px 0 #6f9fd0) drop-shadow(0 -2px 0 #6f9fd0)
+    drop-shadow(0 8px 16px rgba(47, 127, 209, 0.3));
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cap-btn-steel:hover {
+  filter:
+    drop-shadow(2px 0 0 #6f9fd0) drop-shadow(-2px 0 0 #6f9fd0)
+    drop-shadow(0 2px 0 #6f9fd0) drop-shadow(0 -2px 0 #6f9fd0)
+    brightness(1.04);
+  transform: translateY(-1px);
+}
+.cap-btn-steel:active {
+  transform: translateY(2px);
+}
+
+.cap-btn-ghost {
+  background: #ffffff;
+  color: #1d5fae;
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  filter:
+    drop-shadow(2px 0 0 var(--cap-border-strong)) drop-shadow(-2px 0 0 var(--cap-border-strong))
+    drop-shadow(0 2px 0 var(--cap-border-strong)) drop-shadow(0 -2px 0 var(--cap-border-strong))
+    drop-shadow(0 8px 16px rgba(47, 127, 209, 0.22));
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.cap-btn-ghost:hover {
+  background: #e3f0ff;
+  transform: translateY(-1px);
+}
+
+.cap-fade-in {
+  animation: cap-fade-in 0.35s ease both;
+}
+@keyframes cap-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.cap-blink {
+  animation: cap-blink 1.2s steps(2) infinite;
+}
+@keyframes cap-blink {
+  50% { opacity: 0.3; }
+}
+
+.cap-dot-live {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: var(--cap-glow);
+  box-shadow: 0 0 10px rgba(33, 164, 74, 0.7);
+  animation: cap-blink 1.4s steps(2) infinite;
+}
+
+.cap-radar {
+  border: 2px solid rgba(16, 49, 92, 0.7);
+  background:
+    radial-gradient(circle, transparent 0 62%, rgba(83, 200, 255, 0.16) 63%, transparent 65%),
+    radial-gradient(circle, transparent 0 30%, rgba(83, 200, 255, 0.16) 31%, transparent 33%),
+    radial-gradient(circle at 50% 50%, rgba(47, 127, 209, 0.25), rgba(8, 21, 39, 0.96) 72%);
+  overflow: hidden;
+  box-shadow: inset 0 0 44px rgba(2, 8, 18, 0.65);
+}
+.cap-radar::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(to top, rgba(63, 227, 126, 0.85), transparent);
+  transform-origin: top center;
+}
+.cap-radar-sweep {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 0deg, rgba(63, 227, 126, 0.22), transparent 22%);
+  border-radius: 9999px;
+  animation: cap-sweep 3.6s linear infinite;
+}
+@keyframes cap-sweep {
+  to { transform: rotate(360deg); }
+}
+
+.globe-pedestal {
+  position: absolute;
+  left: 50%;
+  bottom: -4%;
+  transform: translateX(-50%);
+  width: 78%;
+  height: 17%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(190, 228, 255, 0.9) 0%,
+      rgba(120, 190, 245, 0.55) 28%,
+      rgba(80, 150, 220, 0.28) 55%,
+      transparent 74%);
+  filter: blur(1px);
+  animation: pedestal-pulse 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.globe-pedestal::before {
+  content: '';
+  position: absolute;
+  inset: 12% 6%;
+  border-radius: 50%;
+  border: 2px solid rgba(190, 228, 255, 0.65);
+  box-shadow: 0 0 18px rgba(120, 190, 245, 0.8), inset 0 0 18px rgba(120, 190, 245, 0.5);
+}
+.globe-pedestal::after {
+  content: '';
+  position: absolute;
+  inset: 30% 18%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(150, 205, 250, 0.5);
+}
+@keyframes pedestal-pulse {
+  0%, 100% { opacity: 0.85; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.03); }
+}
+
+.cap-stripes {
+  display: flex;
+  gap: 5px;
+  align-items: stretch;
+}
+.cap-stripes > i {
+  display: block;
+  width: 13px;
+  background: linear-gradient(180deg, #ffb24d, #f5920b);
+  transform: skewX(-24deg);
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(245, 146, 11, 0.4);
+}
+
+.cap-gate-spin {
+  animation: cap-gate-spin 2.6s linear infinite;
+  transform-origin: center;
+}
+@keyframes cap-gate-spin {
+  to { transform: rotate(360deg); }
+}
+
+.cap-float {
+  animation: cap-float 4.5s ease-in-out infinite;
+}
+@keyframes cap-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ---------- VÍDEO ---------- */
+.cap-video-caption {
+  text-shadow: 1px 1px 0 rgba(8, 20, 38, 0.9);
+  box-shadow: 0 6px 18px rgba(8, 20, 38, 0.4);
+}
+
+/* ---------- TRILHA DA DEFESA (fliperama) ---------- */
+.font-pixel {
+  font-family: var(--font-pixel), 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+.trail-map-panel {
+  border-color: #10315c;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.85) inset,
+    0 0 24px rgba(16, 49, 92, 0.35),
+    0 16px 30px -22px rgba(16, 49, 92, 0.6);
+}
+
+.trail-sky {
+  background:
+    radial-gradient(720px 300px at 16% 0%, rgba(255, 255, 255, 0.5), transparent 60%),
+    linear-gradient(180deg, #cfeaff 0%, #a9dcfb 58%, #8fd0f7 100%);
+}
+
+.trail-sea {
+  background: linear-gradient(180deg, #4aa3e8 0%, #3c96dd 60%, #2f7fd1 100%);
+}
+
+.trail-cloud {
+  filter: drop-shadow(4px 4px 0 rgba(16, 49, 92, 0.16));
+  animation: cap-float 7s ease-in-out infinite;
+}
+
+.trail-ground {
+  background:
+    linear-gradient(180deg, #37b45f 0 14px, #2a9a4e 14px 18px, #a5691f 18px 100%);
+  box-shadow: inset 0 20px 0 rgba(255, 255, 255, 0.12);
+}
+.trail-ground::before {
+  content: '';
+  position: absolute;
+  inset: 18px 0 0 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, rgba(13, 32, 56, 0.16) 46px 52px, transparent 52px 96px),
+    repeating-linear-gradient(0deg, transparent 0 20px, rgba(13, 32, 56, 0.1) 20px 24px, transparent 24px 44px);
+}
+
+.trail-bush {
+  width: 64px;
+  height: 22px;
+  background:
+    linear-gradient(#2fb45f, #2fb45f) 0 8px / 20px 14px no-repeat,
+    linear-gradient(#37c46b, #37c46b) 16px 0 / 28px 22px no-repeat,
+    linear-gradient(#2fb45f, #2fb45f) 42px 8px / 20px 14px no-repeat;
+  filter: drop-shadow(3px 3px 0 rgba(16, 49, 92, 0.25));
+}
+
+.trail-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.5rem, 4.6vw, 4rem);
+  height: clamp(2.5rem, 4.6vw, 4rem);
+  border: 3px solid #10315c;
+  border-radius: 8px;
+  box-shadow:
+    0 5px 0 #10315c,
+    0 10px 18px rgba(16, 49, 92, 0.4),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, filter 0.14s ease;
+}
+.trail-node:hover:not(:disabled) {
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+}
+.trail-node:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 #10315c,
+    0 6px 12px rgba(16, 49, 92, 0.4),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+
+.trail-node-current {
+  background: linear-gradient(180deg, #ffb24d 0%, #f5920b 62%, #e07f0a 100%);
+  animation: trail-bounce 1.6s ease-in-out infinite;
+  cursor: pointer;
+}
+.trail-node-done {
+  background: linear-gradient(180deg, #3ac46c 0%, #21a44a 62%, #178a3a 100%);
+  cursor: pointer;
+}
+.trail-node-locked {
+  background: linear-gradient(180deg, #c3d3e6 0%, #9fb4cc 100%);
+  cursor: not-allowed;
+  box-shadow:
+    0 5px 0 #5a7396,
+    0 8px 14px rgba(16, 49, 92, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+.trail-node-boss {
+  border-radius: 12px;
+  width: clamp(3rem, 5.4vw, 4.6rem);
+  height: clamp(3rem, 5.4vw, 4.6rem);
+}
+.trail-node-boss.trail-node-current {
+  background: linear-gradient(180deg, #b02338 0%, #8f1622 70%, #6d0f1a 100%);
+  box-shadow:
+    0 5px 0 #10315c,
+    0 0 26px rgba(225, 29, 46, 0.55),
+    0 10px 18px rgba(16, 49, 92, 0.4),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+.trail-node-boss.trail-node-done {
+  background: linear-gradient(180deg, #ffc94d 0%, #ffb020 55%, #e07f0a 100%);
+  box-shadow:
+    0 5px 0 #10315c,
+    0 0 26px rgba(255, 176, 32, 0.65),
+    0 10px 18px rgba(16, 49, 92, 0.4),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes trail-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.trail-float {
+  animation: cap-float 3.4s ease-in-out infinite;
+}
+
+.cap-pulse {
+  animation: cap-blink 1.1s steps(2) infinite;
+}
+
+.trail-castle {
+  filter: drop-shadow(0 4px 0 rgba(16, 49, 92, 0.5)) drop-shadow(0 8px 14px rgba(16, 49, 92, 0.35));
+  transition: filter 0.4s ease;
+}
+.trail-castle-safe {
+  filter: drop-shadow(0 4px 0 rgba(16, 49, 92, 0.5)) drop-shadow(0 0 18px rgba(63, 227, 126, 0.8));
+}
+
+.cap-quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.8rem;
+  border: 2px solid var(--cap-border-strong);
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cap-bright);
+  transition: background 0.12s ease, transform 0.12s ease, border-color 0.12s ease;
+}
+.cap-quiz-option .cap-mono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #dcebfd;
+  color: var(--cap-cyan);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.cap-quiz-option:hover {
+  background: #eaf4ff;
+  border-color: #2f7fd1;
+  transform: translateX(3px);
+}
+.cap-quiz-wrong {
+  animation: trail-shake 0.4s ease;
+  border-color: var(--cap-danger) !important;
+  background: #c0182b14 !important;
+}
+@keyframes trail-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+.cap-tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 2px solid var(--cap-border);
+  border-radius: 8px;
+  background: #ffffff;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+a.cap-tool-row:hover {
+  border-color: #2f7fd1;
+  background: #eaf4ff;
+}
+
+.cap-rule-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--cap-border);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(47, 127, 209, 0.06), rgba(47, 127, 209, 0) 40%),
+    #ffffff;
+  box-shadow: 0 10px 20px -16px rgba(16, 49, 92, 0.5);
+  text-align: left;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+}
+.cap-rule-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--cap-orange);
+  box-shadow: 0 14px 24px -16px rgba(224, 127, 10, 0.55);
+}
+
+/* ---------- TRILHA: fantasma animado ---------- */
+.ghost-sprite-body {
+  animation: ghost-float 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 3px 0 rgba(16, 49, 92, 0.22));
+}
+@keyframes ghost-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.ghost-sprite-shadow {
+  display: block;
+  width: 58%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(13, 32, 56, 0.3);
+  margin-top: -3px;
+  animation: ghost-shadow 2.8s ease-in-out infinite;
+}
+@keyframes ghost-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.9; }
+  50% { transform: scaleX(0.7); opacity: 0.5; }
+}
+.ghost-walker {
+  transition: left 1.15s cubic-bezier(0.5, 0, 0.3, 1), top 1.15s cubic-bezier(0.5, 0, 0.3, 1);
+}
+.ghost-walk .ghost-sprite-body { animation: ghost-stride 0.5s ease-in-out infinite; }
+.ghost-walk .ghost-sprite-shadow { animation: none; opacity: 0.6; }
+@keyframes ghost-stride {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* ---------- TRILHA: laboratório de terminal ---------- */
+.cap-terminal {
+  overflow: hidden;
+  border: 2px solid #10315c;
+  border-radius: 10px;
+  background: #0d2038;
+  box-shadow:
+    inset 0 0 0 2px rgba(124, 182, 236, 0.14),
+    0 14px 24px -18px rgba(13, 32, 56, 0.9);
+}
+.cap-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(90deg, #16407a, #10315c);
+  color: #7cb6ec;
+}
+.cap-terminal-status {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  color: #ffb020;
+}
+.cap-terminal-status[data-done='true'] { color: #4be38a; }
+.cap-terminal-mission {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #d8e9fb;
+  border-bottom: 1px solid rgba(124, 182, 236, 0.22);
+}
+.cap-terminal-body {
+  height: 172px;
+  overflow-y: auto;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font-mono-prod), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+.cap-terminal-line { white-space: pre-wrap; word-break: break-word; }
+.cap-terminal-boot { color: #7cb6ec; }
+.cap-terminal-cmd { color: #ffffff; font-weight: 700; margin-top: 4px; }
+.cap-terminal-out { color: #c8ddf2; }
+.cap-terminal-err { color: #ff8f9c; font-weight: 700; }
+.cap-terminal-ok { color: #4be38a; font-weight: 700; margin-top: 4px; }
+.cap-terminal-prompt { color: #4be38a; font-weight: 700; }
+.cap-terminal-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55rem 0.8rem;
+  border-top: 1px solid rgba(124, 182, 236, 0.22);
+  background: #081726;
+  font-family: var(--font-mono-prod), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+}
+.cap-terminal-input input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  caret-color: #4be38a;
+}
+.cap-terminal-input input::placeholder { color: #4f7099; }
+.cap-terminal-input input:disabled { color: #4be38a; }
+.cap-terminal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0.55rem 0.8rem 0.7rem;
+  border-top: 1px dashed rgba(124, 182, 236, 0.25);
+}
+.cap-terminal-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.28rem 0.6rem;
+  border: 1.5px solid #2f7fd1;
+  border-radius: 6px;
+  background: #0d2038;
+  color: #7cb6ec;
+  font-family: var(--font-mono-prod), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+.cap-terminal-chip:hover {
+  background: #16407a;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ---------- TRILHA: certificado ---------- */
+.cap-cert-name-input {
+  border-color: var(--cap-border-strong);
+  background: #ffffff;
+  font-weight: 700;
+}
+.cap-cert-wrap {
+  display: flex;
+  justify-content: center;
+}
+.cap-cert-paper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  padding: 26px 26px 20px;
+  background:
+    radial-gradient(620px 220px at 50% 0%, rgba(124, 182, 236, 0.18), transparent 70%),
+    linear-gradient(180deg, #ffffff, #f0f7ff);
+  border: 3px solid #10315c;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 6px #ffffff,
+    0 0 0 9px #2f7fd1,
+    0 28px 44px -26px rgba(16, 49, 92, 0.6);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.cap-cert-frame i {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: #f5920b;
+  border: 3px solid #10315c;
+  border-radius: 3px;
+}
+.cap-cert-frame i:nth-child(1) { top: 9px; left: 9px; }
+.cap-cert-frame i:nth-child(2) { top: 9px; right: 9px; }
+.cap-cert-frame i:nth-child(3) { bottom: 9px; left: 9px; }
+.cap-cert-frame i:nth-child(4) { bottom: 9px; right: 9px; }
+.cap-cert-name {
+  min-height: 1.9rem;
+  letter-spacing: 0.04em;
+}
+.cap-cert-name-rule {
+  display: block;
+  width: min(320px, 72%);
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #2f7fd1, transparent);
+}
+.cap-cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+  max-width: 660px;
+  margin-inline: auto;
+}
+.cap-cert-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cap-text);
+}
+.cap-cert-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cap-dim);
+}
+.cap-cert-stats b {
+  color: var(--cap-orange-deep);
+  font-weight: 800;
+}
+.cap-cert-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  border-top: 2px dashed rgba(16, 49, 92, 0.28);
+  padding-top: 12px;
+}
+.cap-cert-sign { text-align: center; }
+.cap-cert-sign-rule {
+  display: block;
+  width: min(200px, 30vw);
+  height: 2px;
+  background: #10315c;
+  margin: 4px auto;
+}
+.cap-cert-meta {
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--cap-bright);
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 10mm; }
+  body * { visibility: hidden !important; }
+  .cap-cert-paper,
+  .cap-cert-paper * {
+    visibility: visible !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .cap-cert-paper {
+    position: fixed;
+    top: 12mm;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 262mm;
+    max-width: none;
+    box-shadow: 0 0 0 6px #ffffff, 0 0 0 9px #2f7fd1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trail-node-current, .trail-float, .trail-cloud, .cap-pulse, .cap-quiz-wrong,
+  .ghost-sprite-body, .ghost-sprite-shadow, .ghost-walk .ghost-sprite-body { animation: none; }
+  .ghost-walker { transition: none; }
+}
+
+.dash-grid {
+  display: grid;
+  gap: 16px 12px;
+  grid-template-columns: 208px repeat(15, minmax(0, 1fr));
+  grid-template-areas:
+    "video video video video video video video video video video video hero hero hero hero hero"
+    "side  chips chips chips chips chips chips globe globe globe globe globe globe rail rail rail"
+    "perigo perigo perigo perigo perigo perigo defesa defesa defesa defesa defesa defesa defesa rail rail rail"
+    "hacker hacker hacker hacker hacker hacker hacker hacker hacker hacker hacker hacker hacker rail rail rail"
+    "osint osint osint osint osint osint osint osint osint osint osint osint osint osint osint osint"
+    "payload payload payload payload postura postura postura postura alertas alertas alertas alertas frota frota frota frota";
+}
+.area-side { grid-area: side; }
+.area-osint { grid-area: osint; }
+.area-hero { grid-area: hero; }
+.area-video { grid-area: video; }
+.area-chips { grid-area: chips; }
+.area-globe { grid-area: globe; }
+.area-rail { grid-area: rail; }
+.area-perigo { grid-area: perigo; }
+.area-defesa { grid-area: defesa; }
+.area-hacker { grid-area: hacker; }
+.area-payload { grid-area: payload; }
+.area-alertas { grid-area: alertas; }
+.area-frota { grid-area: frota; }
+
+@media (max-width: 1279px) {
+  .dash-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "video video"
+      "hero  hero"
+      "chips chips"
+      "globe rail"
+      "perigo perigo"
+      "defesa defesa"
+      "hacker hacker"
+      "osint osint"
+      "payload postura"
+      "alertas alertas"
+      "frota  frota";
+  }
+  .area-side { display: none; }
+}
+
+@media (max-width: 899px) {
+  .dash-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "video"
+      "hero"
+      "chips"
+      "globe"
+      "rail"
+      "perigo"
+      "defesa"
+      "hacker"
+      "osint"
+      "payload"
+      "postura"
+      "alertas"
+      "frota";
+  }
+}
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 49, 92, 0.28);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background-color: rgba(16, 49, 92, 0.45); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cap-blink, .cap-radar-sweep, .cap-fade-in, .cap-float, .cap-gate-spin, .globe-pedestal { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Relatório executivo (impressão / PDF via Ctrl+P) ─────────────────── */
+@media print {
+  header, footer, nav, .cap-side-rail, [data-tut], button, .no-print {
+    display: none !important;
+  }
+  body, .cap-bg-grid {
+    background: #fff !important;
+  }
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .cap-panel {
+    break-inside: avoid;
+    border: 1px solid #999 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+  }
+  a[href]::after {
+    content: '';
+  }
+}
+
+/* ============ Tela cheia (FullscreenButton · data-fs-root) ============ */
+[data-fs-root]:fullscreen {
+  background: #0b1524;
+}
+/* palco da trilha 3D: estica a cadeia de molduras em tela cheia */
+#trilha-fs-root:fullscreen {
+  display: flex;
+  flex-direction: column;
+}
+#trilha-fs-root:fullscreen > .fs-frame,
+#trilha-fs-root:fullscreen .fs-inner {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+#trilha-fs-root:fullscreen .fs-stage {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CAPYBER v2 — KIT DE DESIGN "OPERAÇÃO GRANDE SALTO"
+   40 melhorias de design · utilitários novos · surreal kit · tela cheia
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ---------- D01 · Vidro fosco (glass) para barras e overlays ---------- */
+.cap-glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(240, 248, 255, 0.68));
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  border: 1px solid rgba(185, 212, 240, 0.85);
+  box-shadow: 0 10px 30px -18px rgba(16, 49, 92, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- D02 · Hover de card com elevação suave ---------- */
+.cap-card-hover {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  will-change: transform;
+}
+@media (hover: hover) {
+  .cap-card-hover:hover {
+    transform: translateY(-3px);
+    border-color: #7fb3e6;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.85) inset,
+      0 0 22px rgba(124, 182, 236, 0.5),
+      0 22px 38px -22px rgba(16, 49, 92, 0.55);
+  }
+}
+
+/* ---------- D03 · Underline animado nas abas do menu ---------- */
+.cap-tab { position: relative; overflow: hidden; }
+.cap-tab::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 6px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--cap-orange), transparent);
+  transform: scaleX(0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cap-tab:hover::after { transform: scaleX(0.6); }
+.cap-tab[data-state='active']::after { transform: scaleX(1); }
+
+/* ---------- D04 · Texto com gradiente de marca ---------- */
+.cap-gradient-text {
+  background: linear-gradient(92deg, #123a6b 0%, #2569b8 42%, #f5920b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- D05 · Números tabulares (contadores estáveis) ---------- */
+.cap-num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+/* ---------- D06 · Scrollbar slim com identidade ---------- */
+.cap-scroll-slim { scrollbar-width: thin; scrollbar-color: #9cc3ea transparent; }
+.cap-scroll-slim::-webkit-scrollbar { width: 8px; height: 8px; }
+.cap-scroll-slim::-webkit-scrollbar-track { background: transparent; }
+.cap-scroll-slim::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9cc3ea, #6f9fd0);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.cap-scroll-slim::-webkit-scrollbar-thumb:hover { background: #5d92c8; background-clip: padding-box; }
+
+/* ---------- D07 · Stagger de entrada (listas que revelam em cascata) ---------- */
+.cap-stagger > * { animation: cap-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.cap-stagger > *:nth-child(1) { animation-delay: 0.02s; }
+.cap-stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.cap-stagger > *:nth-child(3) { animation-delay: 0.1s; }
+.cap-stagger > *:nth-child(4) { animation-delay: 0.14s; }
+.cap-stagger > *:nth-child(5) { animation-delay: 0.18s; }
+.cap-stagger > *:nth-child(6) { animation-delay: 0.22s; }
+.cap-stagger > *:nth-child(7) { animation-delay: 0.26s; }
+.cap-stagger > *:nth-child(8) { animation-delay: 0.3s; }
+.cap-stagger > *:nth-child(9) { animation-delay: 0.34s; }
+.cap-stagger > *:nth-child(10) { animation-delay: 0.38s; }
+.cap-stagger > *:nth-child(11) { animation-delay: 0.42s; }
+.cap-stagger > *:nth-child(12) { animation-delay: 0.46s; }
+@keyframes cap-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- D08 · Skeleton com brilho passante ---------- */
+.cap-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #e4eefb;
+  border-radius: 8px;
+}
+.cap-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 24%, rgba(255, 255, 255, 0.75) 50%, transparent 76%);
+  animation: cap-shimmer 1.7s ease-in-out infinite;
+}
+@keyframes cap-shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* ---------- D09 · Anel de pulso para alvos/alertas ---------- */
+.cap-pulse-ring { position: relative; }
+.cap-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid rgba(245, 146, 11, 0.75);
+  animation: cap-pulse-ring 1.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  pointer-events: none;
+}
+@keyframes cap-pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* ---------- D10 · Botão de perigo e de sucesso ---------- */
+.cap-btn-danger {
+  background: linear-gradient(180deg, #e0243a 0%, #c0182b 55%, #99061a 100%);
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(16, 49, 92, 0.4);
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  filter: drop-shadow(2px 0 0 #4a0a12) drop-shadow(-2px 0 0 #4a0a12) drop-shadow(0 2px 0 #4a0a12) drop-shadow(0 -2px 0 #4a0a12);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cap-btn-danger:hover { filter: brightness(1.07) drop-shadow(0 6px 16px rgba(192, 24, 43, 0.45)); transform: translateY(-1px); }
+.cap-btn-danger:active { transform: translateY(2px); }
+.cap-btn-success {
+  background: linear-gradient(180deg, #3ecb6e 0%, #21a44a 55%, #178a3a 100%);
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(6, 40, 18, 0.45);
+  font-family: var(--font-heading-digi), var(--font-sans-prod), sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  filter: drop-shadow(2px 0 0 #0d3b1e) drop-shadow(-2px 0 0 #0d3b1e) drop-shadow(0 2px 0 #0d3b1e) drop-shadow(0 -2px 0 #0d3b1e);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cap-btn-success:hover { filter: brightness(1.06) drop-shadow(0 6px 16px rgba(33, 164, 74, 0.4)); transform: translateY(-1px); }
+.cap-btn-success:active { transform: translateY(2px); }
+
+/* ---------- D11 · Chips com micro-interação ---------- */
+.cap-chip { transition: transform 0.16s ease, filter 0.16s ease; }
+@media (hover: hover) {
+  .cap-chip:hover { transform: translateY(-1px); filter: brightness(1.03); }
+}
+
+/* ---------- D12 · Ticker / letreiro contínuo ---------- */
+.cap-ticker {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.cap-ticker-track {
+  display: inline-flex;
+  gap: 3.5rem;
+  white-space: nowrap;
+  animation: cap-ticker 26s linear infinite;
+  will-change: transform;
+}
+@keyframes cap-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- D13 · Barra de XP / progresso com brilho ---------- */
+.cap-xpbar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dbe9fa;
+  box-shadow: inset 0 2px 5px rgba(16, 49, 92, 0.22);
+}
+.cap-xpbar > i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #21a44a, #5fd487 55%, #ffb24d);
+  background-size: 200% 100%;
+  animation: cap-xp 2.6s ease-in-out infinite;
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes cap-xp {
+  0%, 100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}
+
+/* ---------- D14 · Borda "hairline" premium ---------- */
+.cap-hairline { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65), 0 0 0 1px rgba(185, 212, 240, 0.65); }
+
+/* ---------- D15 · Máscara de fade para carrosséis de abas ---------- */
+.cap-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+}
+
+/* ---------- D16 · Heading com marca de seção ---------- */
+.cap-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono-prod), monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cap-cyan);
+}
+.cap-eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cap-orange), transparent);
+}
+
+/* ---------- D17 · Grade responsiva de painéis ---------- */
+.cap-auto-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+
+/* ---------- D18 · Link com seta que desliza ---------- */
+.cap-link-arrow { display: inline-flex; align-items: center; gap: 6px; transition: gap 0.18s ease, color 0.18s ease; }
+.cap-link-arrow:hover { gap: 10px; color: var(--cap-cyan); }
+
+/* ---------- D19 · Aurora surreal (fundo vivo) ---------- */
+.cap-aurora {
+  position: relative;
+  overflow: hidden;
+}
+.cap-aurora::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background:
+    conic-gradient(from 220deg at 30% 20%, rgba(139, 92, 246, 0.16), transparent 30%),
+    conic-gradient(from 40deg at 70% 30%, rgba(47, 187, 208, 0.14), transparent 32%),
+    conic-gradient(from 130deg at 55% 75%, rgba(245, 146, 11, 0.12), transparent 34%),
+    conic-gradient(from 300deg at 20% 70%, rgba(33, 164, 74, 0.1), transparent 30%);
+  filter: blur(34px);
+  animation: cap-aurora 18s linear infinite;
+  pointer-events: none;
+}
+@keyframes cap-aurora {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- D20 · Vinheta cinematográfica ---------- */
+.cap-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(6, 14, 28, 0.42) 100%);
+}
+
+/* ══════════ SURREAL KIT — 10 toques fora da realidade ══════════ */
+
+/* S1 · CRT retrô (scanlines + vinheta + leve curvatura de cor) */
+.cap-crt { position: relative; }
+.cap-crt::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(6, 14, 28, 0.11) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 60%, rgba(4, 10, 22, 0.5) 100%);
+  mix-blend-mode: multiply;
+}
+.cap-crt::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(124, 182, 236, 0.05), transparent 12%, transparent 88%, rgba(124, 182, 236, 0.07));
+  animation: cap-crt-roll 7s linear infinite;
+}
+@keyframes cap-crt-roll {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* S2 · Glitch RGB ocasional no logo */
+.cap-glitch { position: relative; }
+.cap-glitch::before,
+.cap-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.cap-glitch::before { color: rgba(255, 47, 82, 0.75); animation: cap-glitch-a 6s steps(1) infinite; }
+.cap-glitch::after { color: rgba(47, 214, 173, 0.7); animation: cap-glitch-b 6s steps(1) infinite; }
+@keyframes cap-glitch-a {
+  0%, 93%, 100% { opacity: 0; transform: none; clip-path: none; }
+  94% { opacity: 1; transform: translate(-2px, 1px); clip-path: inset(20% 0 55% 0); }
+  96% { opacity: 1; transform: translate(2px, -1px); clip-path: inset(60% 0 10% 0); }
+}
+@keyframes cap-glitch-b {
+  0%, 93.5%, 100% { opacity: 0; transform: none; clip-path: none; }
+  95% { opacity: 1; transform: translate(2px, 0); clip-path: inset(40% 0 30% 0); }
+  97% { opacity: 1; transform: translate(-2px, 1px); clip-path: inset(8% 0 70% 0); }
+}
+
+/* S3 · Modo festa (ciclo de matiz) */
+.cap-party { animation: cap-party 6s linear infinite; }
+@keyframes cap-party {
+  to { filter: hue-rotate(360deg); }
+}
+
+/* S4 · Neon (para easter eggs) */
+.cap-neon {
+  color: #7cfcd4;
+  text-shadow:
+    0 0 6px rgba(124, 252, 212, 0.9),
+    0 0 18px rgba(47, 214, 173, 0.75),
+    0 0 42px rgba(47, 214, 173, 0.45);
+}
+
+/* S5 · Chuva de matrix (canvas fica por conta do JS; máscara aqui) */
+.cap-matrix-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* S6 · Portal de estrelas (overlay de easter egg) */
+.cap-portal {
+  background: radial-gradient(ellipse at center, rgba(24, 10, 48, 0.2), rgba(4, 6, 20, 0.92) 72%);
+  animation: cap-portal-in 0.5s ease both;
+}
+@keyframes cap-portal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.cap-portal-star {
+  position: absolute;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 18px rgba(139, 92, 246, 0.7);
+  animation: cap-star-fly 2.6s linear infinite;
+}
+@keyframes cap-star-fly {
+  from { transform: translateZ(0) scale(0.4); opacity: 0; }
+  12% { opacity: 1; }
+  to { transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(1.6); opacity: 0; }
+}
+
+/* S7 · Flutuação surreal de mobília (modo sonho) — usado no 3D via refs */
+@keyframes cap-dream-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.09px); }
+}
+
+/* S8 · Sparkle do capivara fantasma */
+.cap-sparkle {
+  position: fixed;
+  z-index: 94;
+  pointer-events: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #ffe9b8, rgba(255, 176, 32, 0));
+  animation: cap-sparkle 1.1s ease-out forwards;
+}
+@keyframes cap-sparkle {
+  from { transform: scale(0.4) translateY(0); opacity: 1; }
+  to { transform: scale(1.5) translateY(-26px); opacity: 0; }
+}
+
+/* S9 · Balanço de cortina e brilho de sirene na UI do quarto */
+@keyframes stealth-sway {
+  0%, 100% { transform: rotate(0.5deg); }
+  50% { transform: rotate(-0.5deg); }
+}
+
+/* S10 · Texto "digitando" terminal */
+.cap-type-caret::after {
+  content: '▊';
+  margin-left: 2px;
+  animation: cap-blink 0.9s steps(2) infinite;
+}
+
+/* ---------- UX01 · Estados de foco visíveis em controles escuros ---------- */
+.dark-control:focus-visible,
+.dark-control:focus {
+  outline: 2px solid #7cb6ec !important;
+  outline-offset: 2px;
+}
+
+/* ---------- UX · Fullscreen do quarto (Sala Stealth) ---------- */
+[data-fs-scene]:fullscreen {
+  background: #0b1626;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  border: none;
+}
+[data-fs-scene]:fullscreen .fs-stage {
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+[data-fs-root]:fullscreen {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+[data-fs-root]:fullscreen > main,
+[data-fs-root]:fullscreen > header {
+  flex: 0 0 auto;
+}
+
+/* ---------- UX · Movimento respeitoso (prefers-reduced-motion) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cap-stagger > *,
+  .cap-fade-in,
+  .cap-ticker-track,
+  .cap-aurora::before,
+  .cap-xpbar > i,
+  .cap-pulse-ring::before,
+  .cap-glitch::before,
+  .cap-glitch::after,
+  .cap-portal-star,
+  .cap-sparkle,
+  .cap-skeleton::after,
+  .cap-crt::after {
+    animation: none !important;
+  }
+  .cap-card-hover:hover,
+  .cap-tab:hover,
+  .cap-btn-primary:hover,
+  .cap-btn-steel:hover,
+  .cap-btn-ghost:hover {
+    transform: none;
+  }
+}
+
+/* ---------- UX · Impressão executiva (relatório limpo) ---------- */
+@media print {
+  header, footer, .cap-nav-bar, .NotifyBell, .no-print, .no-print * {
+    display: none !important;
+  }
+  body { background: #fff !important; }
+  .cap-panel {
+    box-shadow: none !important;
+    border: 1px solid #94b8dd !important;
+    break-inside: avoid;
+  }
+  main { max-width: 100% !important; padding: 0 !important; }
+}
+
+/* ===== v2: menu organizado (sem sobreposição) + ajustes mobile ===== */
+.cap-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 6px;
+  clip-path: none;
+  border: 2px solid var(--cap-border-strong);
+  border-radius: 14px;
+  filter: drop-shadow(0 6px 14px rgba(47, 127, 209, 0.2));
+}
+.cap-nav-grid .cap-tab {
+  min-width: 0;
+  min-height: 50px;
+  padding: 0.25rem 0.15rem;
+  font-size: 0.72rem;
+  line-height: 1.1;
+  text-align: center;
+  white-space: normal;
+  overflow: hidden;
+}
+.cap-tab-label { display: block; max-width: 100%; overflow-wrap: anywhere; }
+@media (min-width: 640px) {
+  .cap-nav-grid { grid-template-columns: repeat(6, minmax(86px, 1fr)); }
+  .cap-nav-grid .cap-tab { font-size: 0.85rem; min-height: 54px; }
+}
+@media (min-width: 1536px) {
+  .cap-nav-grid { grid-template-columns: repeat(12, minmax(84px, 1fr)); }
+}
+@media (max-width: 639px) {
+  html, body { overflow-x: hidden; }
+  header .cap-skew-plate { padding: 0.25rem 0.6rem; }
+  header .cap-skew-plate svg { width: 34px; height: 34px; }
+  .cap-panel { min-width: 0; }
+  main { overflow-x: clip; }
+}
+
+/* ===== v3: design geral + responsividade mobile ===== */
+:root { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body {
+  background-image:
+    radial-gradient(1200px 520px at 12% -8%, rgba(124, 182, 236, 0.28), transparent 60%),
+    radial-gradient(900px 480px at 100% 10%, rgba(139, 92, 246, 0.10), transparent 60%);
+  background-attachment: fixed;
+}
+.cap-panel { transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease; }
+@media (hover: hover) {
+  .cap-panel:hover {
+    border-color: var(--cap-cyan);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+      0 0 26px rgba(47, 127, 209, 0.38),
+      0 18px 32px -22px rgba(16, 49, 92, 0.55);
+  }
+}
+.cap-btn-primary, .cap-btn-ghost, .cap-btn-steel { transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.2s ease; }
+.cap-btn-primary:active, .cap-btn-ghost:active, .cap-btn-steel:active { transform: translateY(1px) scale(0.98); }
+@media (hover: hover) {
+  .cap-btn-primary:hover { filter: brightness(1.08); box-shadow: 0 6px 18px rgba(245, 146, 11, 0.4); }
+}
+:focus-visible { outline: 3px solid var(--cap-cyan); outline-offset: 2px; border-radius: 6px; }
+.cap-heading { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+img, svg, canvas, video { max-width: 100%; }
+canvas { touch-action: manipulation; }
+
+@media (max-width: 1023px) {
+  .cap-panel { border-radius: 12px; }
+  main h1, main h2 { overflow-wrap: anywhere; }
+  table { display: block; overflow-x: auto; max-width: 100%; }
+  pre { max-width: 100%; overflow-x: auto; }
+}
+@media (max-width: 639px) {
+  .cap-panel { padding-left: 0.75rem; padding-right: 0.75rem; }
+  button, a.cap-btn-primary, a.cap-btn-ghost, [role='tab'] { min-height: 40px; }
+  [role='dialog'] { max-width: 100vw; }
+  [data-radix-popper-content-wrapper] { max-width: 94vw; }
+  footer { padding-bottom: 5.5rem; }
+  .cap-nav-grid { margin-inline: auto; width: 100%; }
+}
+@supports (padding: max(0px)) {
+  footer { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   v4 · DESIGN POLISH — refinamento global (scrollbars, brilhos, acentos)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ---------- P01 · Scrollbar global com identidade CAPYBER ---------- */
+* { scrollbar-width: thin; scrollbar-color: #9cc3ea transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(228, 238, 251, 0.55); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9cc3ea, #6f9fd0);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: #5d92c8; background-clip: padding-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* ---------- P02 · Inputs com foco radiante (anel laranja da marca) ---------- */
+.cap-input:focus {
+  border-color: var(--cap-orange) !important;
+  box-shadow:
+    0 0 0 3px rgba(245, 146, 11, 0.16),
+    0 0 16px rgba(245, 146, 11, 0.28);
+}
+
+/* ---------- P03 · Shine sweep nos botões (passo de luz ao hover) ---------- */
+.cap-btn-primary, .cap-btn-steel, .cap-btn-danger, .cap-btn-success { position: relative; }
+.cap-btn-primary::after, .cap-btn-steel::after, .cap-btn-danger::after, .cap-btn-success::after {
+  content: '';
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -70%;
+  width: 42%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-16deg);
+  pointer-events: none;
+  transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) {
+  .cap-btn-primary:hover::after, .cap-btn-steel:hover::after,
+  .cap-btn-danger:hover::after, .cap-btn-success:hover::after { left: 128%; }
+}
+
+/* ---------- P04 · Aba ativa com vidro interno mais nobre ---------- */
+.cap-tab[data-state='active'] {
+  box-shadow:
+    0 0 0 2px rgba(93, 155, 216, 0.55),
+    0 4px 14px rgba(47, 127, 209, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- P05 · Linha de acento do header/footer (gradiente da marca) ---------- */
+.cap-header-accent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 146, 11, 0.7) 22%,
+    rgba(47, 127, 209, 0.7) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- P06 · DEFCON quente (pulse quando o nível sobe) ---------- */
+.cap-defcon-hot { animation: cap-defcon-pulse 1.5s ease-in-out infinite; }
+@keyframes cap-defcon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192, 24, 43, 0.32); }
+  50% { box-shadow: 0 0 16px 3px rgba(192, 24, 43, 0.4); }
+}
+
+/* ---------- P07 · Nav mobile: 3 colunas largas + quebra só entre palavras ---------- */
+@media (max-width: 639px) {
+  .cap-nav-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+  .cap-nav-grid .cap-tab { font-size: 0.78rem; min-height: 52px; }
+  .cap-tab-label {
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: manual;
+    line-height: 1.15;
+  }
+}
+
+/* ---------- P08 · Respeito total a quem evita movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cap-btn-primary::after, .cap-btn-steel::after,
+  .cap-btn-danger::after, .cap-btn-success::after { display: none; }
+  .cap-defcon-hot { animation: none; }
+}
+
+/* ═════════════════ LEGADO · montagem de carreira (cine) ═════════════════ */
+
+/* palco do overlay — céu de comando escuro com grid sutil */
+.capy-montage {
+  background:
+    radial-gradient(1200px 500px at 50% -10%, rgba(47, 127, 209, 0.16), transparent 60%),
+    radial-gradient(900px 420px at 85% 110%, rgba(245, 146, 11, 0.1), transparent 60%),
+    linear-gradient(#040a14, #081120 55%, #040a14);
+  color: #e8f2ff;
+}
+.capy-montage::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47, 127, 209, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 127, 209, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* caret do boot */
+.capy-caret { animation: capy-caret 0.85s steps(2, start) infinite; }
+@keyframes capy-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* linhas do boot surgem suaves */
+.capy-fade-line { animation: capy-fade-line 0.5s ease both; }
+@keyframes capy-fade-line { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+
+/* waveform do podcast */
+.capy-wave { animation: capy-wave 1.05s ease-in-out infinite alternate; transform-origin: bottom; }
+@keyframes capy-wave {
+  from { transform: scaleY(0.35); }
+  to { transform: scaleY(1); }
+}
+
+/* raios girando atrás do troféu */
+.capy-rays {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 180, 40, 0.32) 0deg 12deg, transparent 12deg 30deg,
+    rgba(255, 180, 40, 0.32) 30deg 42deg, transparent 42deg 60deg,
+    rgba(255, 180, 40, 0.32) 60deg 72deg, transparent 72deg 90deg,
+    rgba(255, 180, 40, 0.32) 90deg 102deg, transparent 102deg 120deg,
+    rgba(255, 180, 40, 0.32) 120deg 132deg, transparent 132deg 150deg,
+    rgba(255, 180, 40, 0.32) 150deg 162deg, transparent 162deg 180deg,
+    rgba(255, 180, 40, 0.32) 180deg 192deg, transparent 192deg 210deg,
+    rgba(255, 180, 40, 0.32) 210deg 222deg, transparent 222deg 240deg,
+    rgba(255, 180, 40, 0.32) 240deg 252deg, transparent 252deg 270deg,
+    rgba(255, 180, 40, 0.32) 270deg 282deg, transparent 282deg 300deg,
+    rgba(255, 180, 40, 0.32) 300deg 312deg, transparent 312deg 330deg,
+    rgba(255, 180, 40, 0.32) 330deg 342deg, transparent 342deg 360deg
+  );
+  animation: capy-rays 9s linear infinite;
+}
+@keyframes capy-rays { to { transform: rotate(360deg); } }
+
+/* confete caindo */
+.capy-confetti { top: -3%; animation: capy-confetti linear infinite; }
+@keyframes capy-confetti {
+  to { transform: translateY(115vh) rotate(720deg); opacity: 0.9; }
+}
+
+/* arcos de ataque no mapa APT */
+.capy-dash { animation: capy-dash 1.6s linear infinite; }
+@keyframes capy-dash {
+  to { stroke-dashoffset: -8.8; }
+}
+
+/* respeito a quem evita movimento nas cenas do Legado */
+@media (prefers-reduced-motion: reduce) {
+  .capy-wave, .capy-rays, .capy-confetti, .capy-dash { animation: none; }
+}
