@@ -17,19 +17,19 @@ Copie o repositório para uma máquina com `git` instalado e rode:
 
 ```bash
 cd capyber
-git remote add origin https://github.com/SEU_USUARIO/capyber.git
+git remote add origin https://github.com/sucloudflare/capyber.git
 git branch -M main
 git push -u origin main
 ```
 
-> Se preferir SSH: `git remote add origin git@github.com:SEU_USUARIO/capyber.git`
+> Se preferir SSH: `git remote add origin git@github.com:sucloudflare/capyber.git`
 
 Se você recebeu o arquivo `capyber-github.bundle`, ele contém **todo o histórico**:
 
 ```bash
 git clone capyber-github.bundle capyber
 cd capyber
-git remote add origin https://github.com/SEU_USUARIO/capyber.git
+git remote add origin https://github.com/sucloudflare/capyber.git
 git push -u origin main
 ```
 
@@ -44,7 +44,7 @@ git init
 git add .
 git commit -m "CAPYBER — plataforma de simulação e defesa cibernética"
 git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/capyber.git
+git remote add origin https://github.com/sucloudflare/capyber.git
 git push -u origin main
 ```
 

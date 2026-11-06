@@ -117,7 +117,7 @@ capyber/
 ```bash
 git clone capyber-github.bundle capyber
 cd capyber
-git remote add origin https://github.com/SEU_USUARIO/capyber.git
+git remote add origin https://github.com/sucloudflare/capyber.git
 git push -u origin main
 ```
 
