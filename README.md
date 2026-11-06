@@ -4,16 +4,7 @@ Plataforma de simulação e defesa cibernética com foco em **endpoints**: motor
 
 ---
 
-> ## ⚠️ Declaração de origem — transparência
-> **Este código não é novo.** Este projeto é a continuação de um projeto antigo meu (chamado internamente de `projeto01`), com código escrito **antes da janela de desenvolvimento do hackathon** (antes das 21h de 04/11, horário de Brasília).
->
-> - A base foi iniciada a partir de **starters públicos** (create-next-app + shadcn/ui — o pacote se chamava `nextjs_tailwind_shadcn_ts`).
-> - O desenvolvimento contou com **auxílio de IA (Claude)** em partes do código.
-> - Em cumprimento ao **item 6.4** do Regulamento, declaro aqui o uso de starters públicos e de IA.
->
-> Como o **item 6.2** do Regulamento veda reaproveitar no repositório entregue código escrito antes da janela oficial, **este pacote deve ser tratado como backup/referência**. Antes de usá-lo como submissão oficial, confirmar com a organização (**oi@hackbrasil.com**); em caso de vedação, o repo oficial será reimplementado do zero, usando este projeto apenas como especificação.
 
----
 
 ## Stack
 
