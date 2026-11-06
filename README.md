@@ -3,7 +3,13 @@
 Plataforma de simulação e defesa cibernética com foco em **endpoints**: motor de ameaças com **8 cenários** mapeados para **MITRE ATT&CK** e kill chain, frota de dispositivos, trilha da defesa com **7 fases** (quiz, terminal e certificado), plano de blindagem com **40 medidas** e o **Capy Fantasma** (base de conhecimento local + LLM), com a voz da VIGIA.
 
 ---
+## Origem do projeto e histórico de commits
 
+- **Início do código:** o CAPYBER começou a ser escrito por volta das **19h de 04/11/2026**, durante a sessão de abertura do evento.
+- **Como foi escrito:** com auxílio de IA (modelo **GLM**, em ambiente da Z.ai). Os commits dessa fase foram feitos **dentro desse ambiente, pela própria IA**, e não fazem parte deste repositório.
+- **Este repositório:** foi criado **depois das 21h de 04/11/2026** e **não importa** o histórico daquele ambiente. Por isso tem apenas **2 commits**: o commit inicial e o commit do README.
+- **Correção:** uma versão anterior deste README dizia que o projeto era baseado em um "projeto antigo" (projeto01). Isso **estava errado** e foi removido. Não existe projeto anterior.
+- **Base técnica:** starters públicos (create-next-app e shadcn/ui).
 
 
 ## Stack
